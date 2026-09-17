@@ -1,4 +1,5 @@
 import { List, ListItem, ListItemText, Typography } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 interface Activity {
@@ -10,9 +11,9 @@ function App() {
   const [activities, setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
-    fetch("https://localhost:5001/api/v1/events")
-      .then(response => response.json())
-      .then(data => setActivities(data));
+    axios.get<Activity[]>("https://localhost:5001/api/v1/events")
+      .then(response => setActivities(response.data));
+    
     return () => {};
   }, []);
     
