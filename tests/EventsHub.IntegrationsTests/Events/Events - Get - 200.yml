@@ -8,11 +8,14 @@ http:
   url: "{{baseUrl}}/events/:eventId"
   params:
     - name: eventId
-      value: 07e8bfe5-d360-4a1f-993f-4315020d2941
+      value: 0031d30b-7d3d-4474-8341-365c0df67964
       type: path
   auth: inherit
 
 runtime:
+  variables:
+    - name: baseUrl
+      value: https://localhost:5001/api/v1
   scripts:
     - type: tests
       code: |-
