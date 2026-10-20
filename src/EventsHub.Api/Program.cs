@@ -1,7 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using EventsHub.Persistence;
-using EventsHub.Application.Events.Queries;
 using EventsHub.Application.Core;
+using EventsHub.Application.Core.Mapping;
+using EventsHub.Application.Events.Queries;
+using EventsHub.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,7 @@ builder.Services.AddCors();
 builder.Services.AddMediatR(opt =>
     opt.RegisterServicesFromAssemblyContaining<GetEventList.Handler>()
 );
-builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+builder.Services.AddMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 
@@ -24,7 +25,7 @@ app.UseCors(opt => opt
     .AllowAnyHeader()
     .AllowAnyMethod()
     .WithOrigins("http://localhost:3000", "https://localhost:3000"));
-    
+
 if (app.Environment.IsDevelopment()) { }
 
 using var scope = app.Services.CreateScope();
@@ -38,7 +39,7 @@ try
 catch (Exception ex)
 {
     var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error occurred while seeding the database.");
+    logger.LogError(ex, "An error occurred during database migration.");
 }
 
 app.MapControllers();

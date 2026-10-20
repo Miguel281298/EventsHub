@@ -15,11 +15,11 @@ public class DeleteEvent
         public async Task Handle(Command request, CancellationToken cancellationToken)
         {
             var @event = await context.Events
-                .FindAsync(request.Id, cancellationToken)
+                .FindAsync([request.Id], cancellationToken)
                 ?? throw new Exception("Event not found");
 
-            context.Events.Remove(@event);
-            
+            context.Remove(@event);
+
             await context.SaveChangesAsync(cancellationToken);
         }
     }

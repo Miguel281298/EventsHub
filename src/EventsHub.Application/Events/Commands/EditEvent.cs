@@ -1,4 +1,4 @@
-using AutoMapper;
+using EventsHub.Application.Core.Mapping;
 using EventsHub.Domain;
 using EventsHub.Persistence;
 using MediatR;
@@ -19,7 +19,7 @@ public class EditEvent
             var @event = await context.Events
                 .FindAsync([request.Event.Id], cancellationToken)
                 ?? throw new Exception("Event not found");
-
+            
             mapper.Map(request.Event, @event);
 
             await context.SaveChangesAsync(cancellationToken);

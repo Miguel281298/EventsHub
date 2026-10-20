@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 using EventsHub.Api.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +50,7 @@ public class EventsControllerTests
         var nonExistentId = Guid.NewGuid().ToString();
 
         var result = await _eventsController.GetEventDetailAsync(nonExistentId);
-
+        
         Assert.That(result.Result, Is.InstanceOf<NotFoundObjectResult>());
 
         var notFoundResult = (NotFoundObjectResult)result.Result;
