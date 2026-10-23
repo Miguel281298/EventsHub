@@ -1,0 +1,31 @@
+info:
+  name: Events - Get - 200
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{baseUrl}}/events/:eventId"
+  params:
+    - name: eventId
+      value: 0031d30b-7d3d-4474-8341-365c0df67964
+      type: path
+  auth: inherit
+
+runtime:
+  variables:
+    - name: baseUrl
+      value: https://localhost:5001/api/v1
+  scripts:
+    - type: tests
+      code: |-
+        test("Status code is 200 Ok", function(){
+          expect(res.getStatus()).to.equal(200);
+        });
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
