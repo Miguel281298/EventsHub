@@ -16,6 +16,7 @@ export default function ActivityDetail() {
 
   if (isLoadingActivity) return <Typography>Loading...</Typography>
   if (!activity) return <Typography>Activity not found</Typography>
+  if (activity) console.log(activity)
 
   return (
     <Card sx={{ borderRadius: 3 }}>
@@ -31,11 +32,7 @@ export default function ActivityDetail() {
         <Typography variant="body1">{activity.description}</Typography>
       </CardContent>
       <CardActions>
-        <Button
-          component={Link}
-          to={`/activities/${activity.id}`}
-          color="primary"
-        >
+        <Button component={Link} to={`/manage/${activity.id}`} color="primary">
           Edit
         </Button>
         <Button onClick={() => navigate('/activities')} color="inherit">
