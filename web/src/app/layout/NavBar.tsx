@@ -4,11 +4,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Button,
   Container,
   MenuItem,
   MenuList,
 } from '@mui/material'
+import { NavLink } from 'react-router'
+import MenuItemLink from '../shared/components/MenuItemLink'
 
 export default function NavBar() {
   return (
@@ -23,7 +24,11 @@ export default function NavBar() {
         <Container maxWidth="xl">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <MenuList>
-              <MenuItem sx={{ display: 'flex', gap: 2 }}>
+              <MenuItem
+                component={NavLink}
+                to="/"
+                sx={{ display: 'flex', gap: 2 }}
+              >
                 <Group fontSize="large" />
                 <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
                   Activities
@@ -31,24 +36,10 @@ export default function NavBar() {
               </MenuItem>
             </MenuList>
             <MenuList disablePadding sx={{ display: 'flex' }}>
-              <MenuItem sx={{ fontSize: '1.2rem', textTransform: 'uppercase' }}>
-                Activities
-              </MenuItem>
-              <MenuItem sx={{ fontSize: '1.2rem', textTransform: 'uppercase' }}>
-                About
-              </MenuItem>
-              <MenuItem sx={{ fontSize: '1.2rem', textTransform: 'uppercase' }}>
-                Contact
-              </MenuItem>
+              <MenuItemLink to="/activities">Activities</MenuItemLink>
+              <MenuItemLink to="/createActivity">Create activity</MenuItemLink>
             </MenuList>
-            <Button
-              onClick={() => {}}
-              size="large"
-              variant="contained"
-              color="warning"
-            >
-              Create activity
-            </Button>
+            User menu
           </Toolbar>
         </Container>
       </AppBar>
